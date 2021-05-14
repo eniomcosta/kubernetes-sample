@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: meureplicaset
+spec:
+  #Número de replicas/pods a serem criados
+  replicas: 10
+  selector:
+    matchLabels:
+      #Mesmo label informado no arquivo do pod
+      app: nginx
+  template:
+    #Mesma informação no arquivo do pod com exceção do name
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: site
+          image: kubedevio/nginx-color:blue 
+          ports:
+            - containerPort: 80
